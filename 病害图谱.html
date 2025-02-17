@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>病害图谱</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrolling of the entire page */
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 900px; /* Increased width */
+            width: 100%;
+            height: 80vh; /* Increased height */
+            overflow-y: auto; /* Enable vertical scroll inside the content */
+            padding-bottom: 2rem; /* Ensure there's space at the bottom for scrolling */
+            text-align: center;
+        }
+        .back-button {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .back-button:hover {
+            background: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            opacity: 0; /* Initially hide the images */
+            transition: opacity 1s ease-in-out;
+        }
+        .image-gallery img {
+            opacity: 1; /* Make the images visible when scrolled into view */
+        }
+        .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .highlight {
+            color: red;
+        }
+        .disease-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px; /* Space between sections */
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>病害图谱</h1>
+        <!-- 图片展示 -->
+        <div class="image-gallery">
+            <!-- 黑斑病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">黑斑病</span></p>
+                <img src="黑斑病1.png" alt="黑斑病1">
+                <img src="黑斑病2.png" alt="黑斑病2">
+                <img src="黑斑病3.png" alt="黑斑病3">
+            </div>
+
+            <!-- 炭疽病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">炭疽病</span></p>
+                <img src="炭疽病1.png" alt="炭疽病1">
+                <img src="炭疽病2.png" alt="炭疽病2">
+                <img src="炭疽病3.png" alt="炭疽病3">
+            </div>
+            <!-- 白粉病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">白粉病</span></p>
+                <img src="白粉病1.png" alt="白粉病1">
+            </div>
+            <!-- 溃疡病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">溃疡病</span></p>
+                <img src="溃疡病1.png" alt="溃疡病1">
+                <img src="溃疡病2.png" alt="溃疡病2">
+                <img src="溃疡病3.png" alt="溃疡病3">
+            </div>
+            <!-- 枝枯病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">枝枯病</span></p>
+                <img src="枝枯病1.png" alt="枝枯病1">
+            </div>
+            <!-- 根腐病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">根腐病</span></p>
+                <img src="根腐病1.png" alt="根腐病1">
+            </div>
+            <!-- 木腐病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">木腐病</span></p>
+                <img src="木腐病1.png" alt="木腐病1">
+            </div>
+            <!-- 日灼病 -->
+            <div class="disease-section">
+                <p class="title">核桃主要病害识别 -- <span class="highlight">日灼病</span></p>
+                <img src="日灼病1.png" alt="日灼病1">
+            </div>
+        </div>
+    </div>
+    <button class="back-button" onclick="window.location.href='index.html'">返回首页</button>
+
+    <script>
+        // Ensure images appear smoothly when they are scrolled into view
+        const images = document.querySelectorAll('img');
+        window.addEventListener('scroll', function () {
+            images.forEach(img => {
+                if (img.getBoundingClientRect().top < window.innerHeight) {
+                    img.style.opacity = '1'; // Fade in the image
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
