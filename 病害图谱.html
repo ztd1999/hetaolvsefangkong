@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>病害图谱</title>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* 全局样式 */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('背景图1.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,63 +19,193 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow: hidden; /* Prevent scrolling of the entire page */
+            color: #fff;
+            overflow: hidden;
         }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-        .content {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            max-width: 900px; /* Increased width */
-            width: 100%;
-            height: 80vh; /* Increased height */
-            overflow-y: auto; /* Enable vertical scroll inside the content */
-            padding-bottom: 2rem; /* Ensure there's space at the bottom for scrolling */
-            text-align: center;
-        }
+
+        /* 返回首页按钮样式 */
         .back-button {
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #007bff;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #6e8efb, #a777e3); /* 渐变背景 */
             color: white;
-            border: none;
-            border-radius: 8px;
             font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px; /* 圆角设计 */
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease; /* 平滑过渡效果 */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+            text-transform: uppercase; /* 文字大写 */
+            letter-spacing: 1px; /* 字母间距 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem; /* 图标与文字之间的间距 */
         }
         .back-button:hover {
-            background: #0056b3;
+            transform: scale(1.05); /* 悬停时稍微放大 */
+            background: linear-gradient(90deg, #a777e3, #6e8efb); /* 悬停时切换渐变方向 */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 更深的阴影 */
         }
+        .back-button::before {
+          
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 2px; /* 字母间距 */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* 添加文字阴影 */
+            margin-bottom: 2rem;
+            color: black;
+        }
+
+        /* 内容区域 */
+        .content {
+            background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); /* 更深的阴影效果 */
+            padding: 2rem;
+            width: 90vw; /* 视口宽度的 90% */
+            max-width: 1200px; /* 最大宽度限制 */
+            height: 85vh; /* 视口高度的 85% */
+            overflow-y: auto; /* 启用垂直滚动 */
+            text-align: center;
+            position: relative;
+            color: #333; /* 内容文字颜色改为深灰色 */
+        }
+
+        /* 图片展示区域 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 自适应网格布局 */
+            gap: 2rem; /* 图片之间的间距 */
+            margin-top: 1rem;
+        }
+
+        /* 病害部分样式 */
+        .disease-section {
+            background: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .disease-section:hover {
+            transform: translateY(-5px); /* 悬停时上移 */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* 悬停时更深的阴影 */
+        }
+
+        /* 病害标签 */
+        .disease-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(90deg, #ff6f61, #ff9a8b); /* 渐变背景 */
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            text-transform: uppercase; /* 转换为大写字母 */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 标题样式 */
+        .title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 添加文字阴影 */
+        }
+
+        /* 高亮样式 */
+        .highlight {
+            color: #ff4d4f; /* 红色高亮 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 添加文字阴影 */
+        }
+
+        /* 图片样式 */
         img {
             max-width: 100%;
             height: auto;
-            margin-top: 1.5rem;
-            border-radius: 8px;
-            opacity: 0; /* Initially hide the images */
-            transition: opacity 1s ease-in-out;
+            border-radius: 10px;
+            cursor: pointer; /* 鼠标悬停时显示手型 */
+            transition: transform 0.3s ease;
         }
-        .image-gallery img {
-            opacity: 1; /* Make the images visible when scrolled into view */
+        img:hover {
+            transform: scale(1.05); /* 悬停时稍微放大 */
         }
-        .title {
-            font-size: 1.8rem;
-            font-weight: bold;
+
+        /* 模态框样式 */
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* 半透明黑色背景 */
+            overflow: auto;
         }
-        .highlight {
-            color: red;
-        }
-        .disease-section {
+        .modal-content {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 20px; /* Space between sections */
+            height: 100%;
+            position: relative;
+        }
+        .modal-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain; /* 图片按比例缩放 */
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001; /* 确保在最上层 */
+        }
+        .close:hover {
+            color: #ccc; /* 悬停时变浅 */
+        }
+
+        /* 左右箭头样式 */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            z-index: 1001; /* 确保在最上层 */
+        }
+        .arrow-left {
+            left: 20px;
+        }
+        .arrow-right {
+            right: 20px;
+        }
+        .arrow:hover {
+            color: #fff; /* 悬停时变亮 */
+            transform: scale(1.2); /* 放大效果 */
+        }
+        .arrow.hidden {
+            display: none; /* 隐藏箭头 */
         }
     </style>
 </head>
@@ -82,66 +216,131 @@
         <div class="image-gallery">
             <!-- 黑斑病 -->
             <div class="disease-section">
+                <div class="disease-tag">黑斑病</div>
                 <p class="title">核桃主要病害识别 -- <span class="highlight">黑斑病</span></p>
-                <img src="黑斑病1.png" alt="黑斑病1">
-                <img src="黑斑病2.png" alt="黑斑病2">
-                <img src="黑斑病3.png" alt="黑斑病3">
+                <img src="黑斑病1.png" alt="黑斑病1" data-src="黑斑病1.png">
+                <img src="黑斑病2.png" alt="黑斑病2" data-src="黑斑病2.png">
+                <img src="黑斑病3.png" alt="黑斑病3" data-src="黑斑病3.png">
             </div>
-
             <!-- 炭疽病 -->
             <div class="disease-section">
+                <div class="disease-tag">炭疽病</div>
                 <p class="title">核桃主要病害识别 -- <span class="highlight">炭疽病</span></p>
-                <img src="炭疽病1.png" alt="炭疽病1">
-                <img src="炭疽病2.png" alt="炭疽病2">
-                <img src="炭疽病3.png" alt="炭疽病3">
+                <img src="炭疽病1.png" alt="炭疽病1" data-src="炭疽病1.png">
+                <img src="炭疽病2.png" alt="炭疽病2" data-src="炭疽病2.png">
+                <img src="炭疽病3.png" alt="炭疽病3" data-src="炭疽病3.png">
             </div>
             <!-- 白粉病 -->
             <div class="disease-section">
+                <div class="disease-tag">白粉病</div>
                 <p class="title">核桃主要病害识别 -- <span class="highlight">白粉病</span></p>
-                <img src="白粉病1.png" alt="白粉病1">
+                <img src="白粉病1.png" alt="白粉病1" data-src="白粉病1.png">
             </div>
-            <!-- 溃疡病 -->
-            <div class="disease-section">
-                <p class="title">核桃主要病害识别 -- <span class="highlight">溃疡病</span></p>
-                <img src="溃疡病1.png" alt="溃疡病1">
-                <img src="溃疡病2.png" alt="溃疡病2">
-                <img src="溃疡病3.png" alt="溃疡病3">
-            </div>
-            <!-- 枝枯病 -->
-            <div class="disease-section">
-                <p class="title">核桃主要病害识别 -- <span class="highlight">枝枯病</span></p>
-                <img src="枝枯病1.png" alt="枝枯病1">
-            </div>
-            <!-- 根腐病 -->
-            <div class="disease-section">
-                <p class="title">核桃主要病害识别 -- <span class="highlight">根腐病</span></p>
-                <img src="根腐病1.png" alt="根腐病1">
-            </div>
-            <!-- 木腐病 -->
-            <div class="disease-section">
-                <p class="title">核桃主要病害识别 -- <span class="highlight">木腐病</span></p>
-                <img src="木腐病1.png" alt="木腐病1">
-            </div>
-            <!-- 日灼病 -->
-            <div class="disease-section">
-                <p class="title">核桃主要病害识别 -- <span class="highlight">日灼病</span></p>
-                <img src="日灼病1.png" alt="日灼病1">
-            </div>
+<!-- 溃疡病 -->
+<div class="disease-section">
+<div class="disease-tag">溃疡病</div>
+<p class="title">核桃主要病害识别 -- <span class="highlight">溃疡病</span></p>
+<img src="溃疡病1.png" alt="溃疡病1" data-src="溃疡病1.png">
+<img src="溃疡病2.png" alt="溃疡病2" data-src="溃疡病2.png">
+<img src="溃疡病3.png" alt="溃疡病3" data-src="溃疡病3.png">
+</div>
+<!-- 枝枯病 -->
+<div class="disease-section">
+<div class="disease-tag">枝枯病</div>
+<p class="title">核桃主要病害识别 -- <span class="highlight">枝枯病</span></p>
+<img src="枝枯病1.png" alt="枝枯病1" data-src="枝枯病1.png">
+</div>
+<!-- 根腐病 -->
+<div class="disease-section">
+<div class="disease-tag">根腐病</div>
+<p class="title">核桃主要病害识别 -- <span class="highlight">根腐病</span></p>
+<img src="根腐病1.png" alt="根腐病1" data-src="根腐病1.png">
+</div>
+<!-- 木腐病 -->
+<div class="disease-section">
+<div class="disease-tag">木腐病</div>
+<p class="title">核桃主要病害识别 -- <span class="highlight">木腐病</span></p>
+<img src="木腐病1.png" alt="木腐病1" data-src="木腐病1.png">
+</div>
+<!-- 日灼病 -->
+<div class="disease-section">
+<div class="disease-tag">日灼病</div>
+<p class="title">核桃主要病害识别 -- <span class="highlight">日灼病</span></p>
+<img src="日灼病1.png" alt="日灼病1" data-src="日灼病1.png">
+</div>
         </div>
     </div>
     <button class="back-button" onclick="window.location.href='index.html'">返回首页</button>
 
+    <!-- 模态框 -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <span class="arrow arrow-left" id="prevBtn">&#10094;</span>
+            <img class="modal-img" id="modalImg">
+            <span class="arrow arrow-right" id="nextBtn">&#10095;</span>
+        </div>
+    </div>
+
     <script>
-        // Ensure images appear smoothly when they are scrolled into view
-        const images = document.querySelectorAll('img');
-        window.addEventListener('scroll', function () {
-            images.forEach(img => {
-                if (img.getBoundingClientRect().top < window.innerHeight) {
-                    img.style.opacity = '1'; // Fade in the image
-                }
+        // 获取所有图片元素
+        const images = Array.from(document.querySelectorAll('.image-gallery img'));
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("modalImg");
+        const closeBtn = document.querySelector(".close");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        let currentIndex = 0;
+
+        // 打开模态框并设置当前图片
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentIndex = index;
+                openModal();
             });
         });
+
+        // 打开模态框
+        function openModal() {
+            modal.style.display = "block";
+            updateModal();
+        }
+
+        // 更新模态框内容
+        function updateModal() {
+            modalImg.src = images[currentIndex].getAttribute('data-src');
+            prevBtn.classList.toggle("hidden", currentIndex === 0); // 隐藏左箭头
+            nextBtn.classList.toggle("hidden", currentIndex === images.length - 1); // 隐藏右箭头
+        }
+
+        // 关闭模态框
+        closeBtn.onclick = () => {
+            modal.style.display = "none"; // 隐藏模态框
+        };
+
+        // 切换到上一张图片
+        prevBtn.onclick = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateModal();
+            }
+        };
+
+        // 切换到下一张图片
+        nextBtn.onclick = () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateModal();
+            }
+        };
+
+        // 点击模态框外部区域关闭模态框
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
     </script>
 </body>
 </html>
-

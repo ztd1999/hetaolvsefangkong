@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>药剂种类</title>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* 全局样式 */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('背景图1.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,50 +19,244 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            color: #fff;
+            overflow: hidden;
         }
+        /* 标题样式 */
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 1.5rem;
+            letter-spacing: 2px; /* 字母间距 */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* 添加文字阴影 */
+            margin-bottom: 2rem;
+            color: black;
         }
+        /* 内容区域 */
         .content {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95); /* 更亮的半透明白色背景 */
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); /* 更深的阴影效果 */
             padding: 2rem;
-            max-width: 600px;
+            max-width: 900px;
             width: 100%;
-            text-align: center;
+            height: 80vh; /* 增加高度 */
+            text-align: left; /* 左对齐以适应表格内容 */
+            position: relative;
+            overflow-y: auto; /* 启用垂直滚动 */
+            color: #333; /* 深灰色字体 */
+            line-height: 1.6; /* 行高增加，提升可读性 */
         }
-        .back-button {
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
+        /* 数据展示样式 */
+        .data-section {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(245, 245, 245, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .data-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .data-section p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #333;
+        }
+        .data-section span {
+            font-weight: bold;
+            color: #ff4d4f; /* 红色高亮 */
+        }
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
             font-size: 1rem;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        /* 返回首页按钮样式 */
+        .back-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #6e8efb, #a777e3); /* 渐变背景 */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         .back-button:hover {
-            background: #0056b3;
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #a777e3, #6e8efb);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 1.5rem;
+        .back-button::before {
+            
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        /* 装饰性线条 */
+        .decoration-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #6e8efb, #a777e3);
+            margin: 2rem 0;
         }
     </style>
 </head>
 <body>
     <div class="content">
         <h1>药剂种类</h1>
-        
-        <!-- 显示上传的图片 -->
-        <img src="药剂种类.png" alt="药剂种类图片">
+        <!-- 核桃有害生物绿色防控禁止使用的农药表 -->
+        <h2 style="margin-top: 2rem;">核桃有害生物绿色防控禁止使用的农药表</h2>
+        <!-- 显示文档中的表格内容 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>种类</th>
+                    <th>农药名称</th>
+                    <th>禁用作物</th>
+                    <th>禁用原因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>有机氯杀虫剂</td>
+                    <td>滴滴涕，六六六、林丹、甲氧滴 滴涕，硫丹</td>
+                    <td>所有作物</td>
+                    <td>高残毒</td>
+                </tr>
+                <tr>
+                    <td>有机氯杀螨剂</td>
+                    <td>三氯杀螨醇</td>
+                    <td>蔬菜、果树、茶 叶</td>
+                    <td>工业品中含有一定 数量的滴滴涕</td>
+                </tr>
+                <tr>
+                    <td>有机磷类杀虫剂</td>
+                    <td>甲拌磷、乙拌磷、久效磷、对硫磷、甲基对硫磷、甲胺磷、甲基异柳磷、怡螟磷、氧化乐果、磷 胺、地虫硫磷、灭克磷 ( 益收宝 ) 、 水胺硫磷、氯唑磷、硫线磷、杀扑磷、特丁硫磷、克线丹、苯线 磷、甲基硫环磷</td>
+                    <td>所有作物</td>
+                    <td>剧毒、高毒</td>
+                </tr>
+                <tr>
+                    <td>氨基甲酸酯杀虫剂</td>
+                    <td>涕灭威、克百威、灭多威、丁硫 克百威、丙硫克百威</td>
+                    <td>所有作物</td>
+                    <td>高毒、剧毒或代谢物高毒</td>
+                </tr>
+                <tr>
+                    <td>二甲基甲脒类杀虫杀螨剂</td>
+                    <td>杀虫脒</td>
+                    <td>所有作物</td>
+                    <td>慢性毒性、致癌</td>
+                </tr>
+                <tr>
+                    <td>拟除虫菊酯类杀虫剂</td>
+                    <td>所有拟除虫菊酯类杀虫剂</td>
+                    <td>水稻及其他水 生作物</td>
+                    <td>对水生生物毒性大</td>
+                </tr>
+                <tr>
+                    <td>卤代烷类熏蒸杀虫剂</td>
+                    <td>二溴乙烷、环氧乙烷、二溴氯丙 烷、溴甲烷</td>
+                    <td>所有作物</td>
+                    <td>致癌、致畸、高毒</td>
+                </tr>
+                <tr>
+                    <td>阿维菌素</td>
+                    <td>阿维菌素</td>
+                    <td>蔬菜、果树</td>
+                    <td>高毒</td>
+                </tr>
+                <tr>
+                    <td>克螨特</td>
+                    <td>克螨特</td>
+                    <td>蔬菜、果树</td>
+                    <td>慢性毒性</td>
+                </tr>
+                <tr>
+                    <td>有机砷杀菌剂</td>
+                    <td>甲基砷酸锌 ( 稻脚青 ) 、甲基砷酸钙砷 ( 稻宁 ) 、甲基砷酸铁銨 ( 田 安 ) 、福美甲砷、福美砷</td>
+                    <td>所有作物</td>
+                    <td>高残毒</td>
+                </tr>
+                <tr>
+                    <td>有机锡杀菌剂</td>
+                    <td>三苯基醋酸锡 ( 薯瘟锡 ) 、三苯基 氯化锡、三苯基径基锡 ( 毒菌锡 )</td>
+                    <td>所有作物</td>
+                    <td>高残留、慢性毒性</td>
+                </tr>
+                <tr>
+                    <td>有机汞杀菌剂</td>
+                    <td>氯化乙基汞 ( 西力生 ) 、醋酸苯汞 ( 赛力散〕</td>
+                    <td>所有作物</td>
+                    <td>剧毒、高残毒</td>
+                </tr>
+                <tr>
+                    <td>有机磷杀菌剂</td>
+                    <td>稻瘟净、异稻瘟净</td>
+                    <td>水稻</td>
+                    <td>异臭</td>
+                </tr>
+                <tr>
+                    <td>取代苯类杀菌剂</td>
+                    <td>五氯硝基苯、稻瘟醇（五氯苯甲 醇）</td>
+                    <td>所有作物</td>
+                    <td>致癌、高残留</td>
+                </tr>
+                <tr>
+                    <td>2 ， 4-D 类化合物</td>
+                    <td>除草剂或植物生长调节剂</td>
+                    <td>所有作物</td>
+                    <td>杂质致癌</td>
+                </tr>
+                <tr>
+                    <td>二苯醚类除草剂</td>
+                    <td>除草醚、草枯醚</td>
+                    <td>所有作物</td>
+                    <td>慢性毒性</td>
+                </tr>
+                <tr>
+                    <td>植物生长调节剂</td>
+                    <td>有机合成的植物生长调节剂</td>
+                    <td>所有作物</td>
+                    <td>    </td>
+                </tr>
+                <tr>
+                    <td>除草剂</td>
+                    <td>各类除草剂</td>
+                    <td>蔬菜生长期（可用于土壤处理与芽前处理）
+</td>
+                    <td>    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <button class="back-button" onclick="window.location.href='index.html'">返回首页</button>
 </body>
